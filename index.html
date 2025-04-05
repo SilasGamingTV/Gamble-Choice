@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Player Game</title>
+    <style>
+        .player-box {
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+        }
+        .mode-box {
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="players">
+        <!-- Player Input Boxes -->
+        <div id="player1" class="player-box">
+            <label for="bid1">Player 1 Bid:</label>
+            <input type="number" id="bid1" name="bid1" min="0.01" step="0.01"><br>
+            <label for="guess1">Player 1 Guess:</label>
+            <input type="number" id="guess1" name="guess1" min="1">
+        </div>
+        <div id="player2" class="player-box">
+            <label for="bid2">Player 2 Bid:</label>
+            <input type="number" id="bid2" name="bid2" min="0.01" step="0.01"><br>
+            <label for="guess2">Player 2 Guess:</label>
+            <input type="number" id="guess2" name="guess2" min="1">
+        </div>
+        <div id="player3" class="player-box">
+            <label for="bid3">Player 3 Bid:</label>
+            <input type="number" id="bid3" name="bid3" min="0.01" step="0.01"><br>
+            <label for="guess3">Player 3 Guess:</label>
+            <input type="number" id="guess3" name="guess3" min="1">
+        </div>
+        <div id="player4" class="player-box">
+            <label for="bid4">Player 4 Bid:</label>
+            <input type="number" id="bid4" name="bid4" min="0.01" step="0.01"><br>
+            <label for="guess4">Player 4 Guess:</label>
+            <input type="number" id="guess4" name="guess4" min="1">
+        </div>
+        <div id="player5" class="player-box">
+            <label for="bid5">Player 5 Bid:</label>
+            <input type="number" id="bid5" name="bid5" min="0.01" step="0.01"><br>
+            <label for="guess5">Player 5 Guess:</label>
+            <input type="number" id="guess5" name="guess5" min="1">
+        </div>
+        <div id="player6" class="player-box">
+            <label for="bid6">Player 6 Bid:</label>
+            <input type="number" id="bid6" name="bid6" min="0.01" step="0.01"><br>
+            <label for="guess6">Player 6 Guess:</label>
+            <input type="number" id="guess6" name="guess6" min="1">
+        </div>
+        <div id="player7" class="player-box">
+            <label for="bid7">Player 7 Bid:</label>
+            <input type="number" id="bid7" name="bid7" min="0.01" step="0.01"><br>
+            <label for="guess7">Player 7 Guess:</label>
+            <input type="number" id="guess7" name="guess7" min="1">
+        </div>
+        <div id="player8" class="player-box">
+            <label for="bid8">Player 8 Bid:</label>
+            <input type="number" id="bid8" name="bid8" min="0.01" step="0.01"><br>
+            <label for="guess8">Player 8 Guess:</label>
+            <input type="number" id="guess8" name="guess8" min="1">
+        </div>
+        <div id="player9" class="player-box">
+            <label for="bid9">Player 9 Bid:</label>
+            <input type="number" id="bid9" name="bid9" min="0.01" step="0.01"><br>
+            <label for="guess9">Player 9 Guess:</label>
+            <input type="number" id="guess9" name="guess9" min="1">
+        </div>
+        <div id="player10" class="player-box">
+            <label for="bid10">Player 10 Bid:</label>
+            <input type="number" id="bid10" name="bid10" min="0.01" step="0.01"><br>
+            <label for="guess10">Player 10 Guess:</label>
+            <input type="number" id="guess10" name="guess10" min="1">
+        </div>
+    </div>
+
+    <button id="doneButton">Done</button>
+
+    <div id="modes" class="hidden">
+        <!-- Mode Voting -->
+        <div class="mode-box">
+            <h3>Easy (1-10)</h3>
+            <p>1x money, 1 try to guess</p>
+            <button onclick="vote('easy')">Vote</button>
+            <span id="easyVotes">0</span> votes
+        </div>
+        <div class="mode-box">
+            <h3>Medium (1-25)</h3>
+            <p>2x money, 2 tries</p>
+            <button onclick="vote('medium')">Vote</button>
+            <span id="mediumVotes">0</span> votes
+        </div>
+        <div class="mode-box">
+            <h3>Hard (1-50)</h3>
+            <p>3x money, 3 tries</p>
+            <button onclick="vote('hard')">Vote</button>
+            <span id="hardVotes">0</span> votes
+        </div>
+        <div class="mode-box">
+            <h3>Very Hard (1-100)</h3>
+            <p>5x money, 4 tries</p>
+            <button onclick="vote('veryHard')">Vote</button>
+            <span id="veryHardVotes">0</span> votes
+        </div>
+        <div class="mode-box">
+            <h3>Extreme (1-500)</h3>
+            <p>10x money, 5 tries</p>
+            <button onclick="vote('extreme')">Vote</button>
+            <span id="extremeVotes">0</span> votes
+        </div>
+        <div class="mode-box">
+            <h3>Impossible (1-1000)</h3>
+            <p>20x money, 6 tries</p>
+            <button onclick="vote('impossible')">Vote</button>
+            <span id="impossibleVotes">0</span> votes
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('doneButton').addEventListener('click', function() {
+            document.getElementById('players').classList.add('hidden');
+            document.getElementById('modes').classList.remove('hidden');
+        });
+
+        function vote(mode) {
+            const voteSpan = document.getElementById(mode + 'Votes');
+            voteSpan.textContent = parseInt(voteSpan.textContent) + 1;
+        }
+    </script>
+</body>
+</html>
